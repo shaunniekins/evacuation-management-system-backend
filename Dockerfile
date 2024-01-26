@@ -4,8 +4,11 @@ FROM python:3.12.1
 # Set the working directory
 WORKDIR /code
 
-# Copy only the requirements file and install dependencies
+# Copy only the requirements file
 COPY requirements.txt /code/
+
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the application code
