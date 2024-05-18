@@ -37,7 +37,10 @@ class ResidentSerializer(serializers.ModelSerializer):
                   'is_pwd',
                   'is_ip',
                   'is_head',
-                  'household_num')
+                  'household_num',
+                  'street_add',
+                  'length_of_year'
+                  )
 
 
 class MunicipalitySerializer(serializers.ModelSerializer):
@@ -114,7 +117,7 @@ class StockedInSerializer(serializers.ModelSerializer):
     class Meta:
         model = StockedIn
         fields = ('id', 'givenBy', 'donor', 'dateReceived',
-                  'item', 'unit', 'qty')
+                  'item', 'unit', 'qty', 'expir_date')
 
     def get_unit(self, obj):
         return obj.item.unit

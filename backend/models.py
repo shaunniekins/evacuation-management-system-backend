@@ -23,10 +23,12 @@ class Resident(models.Model):
     civil_status = models.CharField(max_length=20)
     occupation = models.CharField(max_length=50)
     resident_status = models.CharField(max_length=20)
-    is_pwd = models.CharField(max_length=3)
-    is_ip = models.CharField(max_length=3)
-    is_head = models.CharField(max_length=3)
+    is_pwd = models.CharField(max_length=20)
+    is_ip = models.CharField(max_length=20)
+    is_head = models.CharField(max_length=20)
     household_num = models.CharField(max_length=15)
+    street_add = models.CharField(max_length=250)
+    length_of_year = models.DateField()
     # emergency_contact_num = models.CharField(
     #     max_length=15, blank=True)  # non-charField should have null=True
 
@@ -55,7 +57,7 @@ class ResidentInEvacuation(models.Model):
     resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
     evacuation = models.ForeignKey(
         Evacuation, on_delete=models.CASCADE, blank=True)
-    isHead = models.CharField(max_length=3)
+    isHead = models.CharField(max_length=20)
     date = models.DateField()
 
 
@@ -99,6 +101,7 @@ class StockedIn(models.Model):
     dateReceived = models.DateField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     qty = models.DecimalField(max_digits=12, decimal_places=1)
+    expir_date = models.DateField()
 
 
 # class RepackedList(models.Model):
@@ -124,7 +127,7 @@ class Distributed(models.Model):
     calamityDate = models.DateField()
     dateDistributed = models.DateField()
     evacuee = models.CharField(max_length=50)
-    headFamily = models.CharField(max_length=3)
+    headFamily = models.CharField(max_length=20)
     is_distributed = models.IntegerField(default=0)
 
 

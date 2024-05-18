@@ -1,21 +1,29 @@
-# Use an official Python runtime as a parent image
-FROM python:3.12.1
+# Use the official Python image as the base image
+FROM python:3.9-slim
 
-# Set the working directory
-WORKDIR /code
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy only the requirements file
-COPY requirements.txt /code/
+# Copy the project files to the container
+COPY . /app/
 
-# Upgrade pip and install dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Install the required packages
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
-COPY . /code/
+# Collect the static files
+RUN python manage.py collectstatic --no-input
 
-# Expose the port
+# Expose the port for the Django application
 EXPOSE 8000
 
-# Run the application
+# Set the environment variables for Django and MySQL
+ENV SECRET_KEY='django-insecure-_64x)^%!axvbhgxm%qt7#tnobo-@c#5^zor$lc05s(9+=otrl3'
+ENV DEBUG=True
+ENV DJANGO_ALLOWED_HOSTS='*'
+ENV MYSQL_DATABASE=evacuation_management_system
+ENV MYSQL_ROOT_PASSWORD=Hello_World123
+ENV MYSQL_PASSWORD=Hello_World123
+ENV MYSQL_USER=root
+
+# Start the Django application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

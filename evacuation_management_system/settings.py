@@ -1,6 +1,7 @@
 from datetime import timedelta
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_64x)^%!axvbhgxm%qt7#tnobo-@c#5^zor$lc05s(9+=otrl3'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +45,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
@@ -124,9 +124,9 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'evacuation_management_system',
-        'ROOT': "root",
-        'PASSWORD': "Hello_World123",
+        'NAME': config('MYSQL_DATABASE'),
+        'USER': config('MYSQL_USER'),
+        'PASSWORD': config('MYSQL_ROOT_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306',
 

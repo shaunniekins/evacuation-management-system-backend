@@ -6,7 +6,7 @@ def get_evacuee_count():
 
 
 def get_family_count():
-    return Resident.objects.filter(is_head='YES').count()
+    return Resident.objects.filter(is_head='HEAD').count()
 
 
 def get_male_count():
@@ -18,7 +18,7 @@ def get_female_count():
 
 
 def get_family_count():
-    return Resident.objects.filter(is_head='YES').count()
+    return Resident.objects.filter(is_head='HEAD').count()
 
 
 def get_evacuation_center_count():
