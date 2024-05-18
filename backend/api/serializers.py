@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from backend.models import Resident, Municipality, Barangay, Evacuation, ResidentInEvacuation, Calamity, Item, Inventory, InventoryPerBarangay, DistributionBarangay, StockedIn, Repacked, Distributed, CashDonation
 
-# from rest_framework import serializers
 from backend.models import CustomUser
 
 
@@ -39,7 +38,8 @@ class ResidentSerializer(serializers.ModelSerializer):
                   'is_head',
                   'household_num',
                   'street_add',
-                  'length_of_year'
+                  'length_of_year',
+                  'is_senior'
                   )
 
 
@@ -123,30 +123,10 @@ class StockedInSerializer(serializers.ModelSerializer):
         return obj.item.unit
 
 
-# class RepackedListSerializerList(serializers.ModelSerializer):
-#     class Meta:
-#         model = RepackedList
-#         fields = ('id', 'items', 'qty', 'reason')
-
-    # def get_unit(self, obj):
-    #     return obj.items.qty
-
-
 class RepackedSerializer(serializers.ModelSerializer):
-    # items = serializers.PrimaryKeyRelatedField(
-    #     queryset=RepackedList.objects.all())
-    # qty = serializers.SerializerMethodField()
-
-    # class Meta:
-    #     model = Repacked
-    #     fields = ('id', 'items', 'qty', 'instance')
-
-    # def get_qty(self, obj):
-    #     return obj.items.qty
-    class Meta:
-        model = Repacked
-        fields = ('id', 'items', 'units', 'qty',
-                  'instance', 'reason', 'barangay')
+    model = Repacked
+    fields = ('id', 'items', 'units', 'qty',
+              'instance', 'reason', 'barangay')
 
 
 class DistributeReliefGoodsSerializer(serializers.ModelSerializer):

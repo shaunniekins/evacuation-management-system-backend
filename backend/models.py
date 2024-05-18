@@ -29,8 +29,7 @@ class Resident(models.Model):
     household_num = models.CharField(max_length=15)
     street_add = models.CharField(max_length=250)
     length_of_year = models.DateField()
-    # emergency_contact_num = models.CharField(
-    #     max_length=15, blank=True)  # non-charField should have null=True
+    is_senior = models.CharField(max_length=20)
 
 
 class Municipality(models.Model):
@@ -104,14 +103,7 @@ class StockedIn(models.Model):
     expir_date = models.DateField()
 
 
-# class RepackedList(models.Model):
-#     items = models.TextField()
-#     qty = models.TextField()
-#     reason = models.TextField()
-
-
 class Repacked(models.Model):
-    # items = models.ForeignKey(RepackedList, on_delete=models.CASCADE)
     items = models.TextField()
     units = models.TextField()
     qty = models.TextField()

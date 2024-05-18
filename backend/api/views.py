@@ -1,25 +1,10 @@
-from django.http import JsonResponse
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser
 from rest_framework import status
-from rest_framework.views import APIView
-
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-
-from django.views.decorators.csrf import csrf_exempt
-from django.db import models
 
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import IsAdminUser
-
-from rest_framework.parsers import JSONParser
-from django.http.response import JsonResponse
-from django.core.files.storage import default_storage
-# from rest_framework.decorators import api_view
-from rest_framework.generics import CreateAPIView
-# from rest_framework.response import Response
 
 from backend.models import Resident, Municipality, Barangay, Evacuation, ResidentInEvacuation, Calamity, Item, Inventory, InventoryPerBarangay, DistributionBarangay, StockedIn, Repacked, Distributed, CashDonation
 
@@ -31,31 +16,6 @@ from .evacuees import get_evacuee_count, get_family_count, get_male_count, get_f
 from rest_framework import generics
 from backend.models import CustomUser
 from backend.api.serializers import CustomUserSerializer
-
-
-# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-#     @classmethod
-#     def get_token(cls, user):
-#         token = super().get_token(user)
-
-#         # Add custom claims
-#         token['username'] = user.username
-#         # ...
-
-#         return token
-
-
-# class MyTokenObtainPairView(TokenObtainPairView):
-#     serializer_class = MyTokenObtainPairSerializer
-
-
-# @api_view(['GET', 'POST'])
-# def getRoutes(request):
-#     routes = [
-#         'api/token',
-#         'api/token/refresh'
-#     ]
-#     return Response(routes)
 
 
 class CustomUserList(generics.ListCreateAPIView):
@@ -169,7 +129,6 @@ def MunicipalityAPI(request, pk=0):
     elif request.method == 'DELETE':
         try:
             municipality = Municipality.objects.get(id=pk)
-            # calamity.delete()
         except Municipality.DoesNotExist:
             return Response("Municipality Not Found", status=status.HTTP_404_NOT_FOUND)
 
@@ -208,7 +167,6 @@ def BarangayAPI(request, pk=0):
     elif request.method == 'DELETE':
         try:
             barangay = Barangay.objects.get(id=pk)
-            # calamity.delete()
         except Barangay.DoesNotExist:
             return Response("Barangay Not Found", status=status.HTTP_404_NOT_FOUND)
 
@@ -246,7 +204,6 @@ def EvacuationAPI(request, pk=0):
     elif request.method == 'DELETE':
         try:
             evacuation = Evacuation.objects.get(id=pk)
-            # calamity.delete()
         except Evacuation.DoesNotExist:
             return Response("Evacuation Not Found", status=status.HTTP_404_NOT_FOUND)
 
@@ -257,7 +214,6 @@ def EvacuationAPI(request, pk=0):
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def ResidentInEvacuationAPI(request, pk=0):
     queryset = ResidentInEvacuation.objects.all()
-    # should be an instance of the serializer class
     serializer_class = ResidentInEvacuationSerializer
 
     if request.method == 'GET':
@@ -288,7 +244,6 @@ def ResidentInEvacuationAPI(request, pk=0):
     elif request.method == 'DELETE':
         try:
             item = ResidentInEvacuation.objects.get(id=pk)
-            # calamity.delete()
         except ResidentInEvacuation.DoesNotExist:
             return Response("Item Not Found", status=status.HTTP_404_NOT_FOUND)
 
@@ -325,7 +280,6 @@ def CalamityAPI(request, pk=0):
     elif request.method == 'DELETE':
         try:
             calamity = Calamity.objects.get(id=pk)
-            # calamity.delete()
         except Calamity.DoesNotExist:
             return Response("Calamity Not Found", status=status.HTTP_404_NOT_FOUND)
 
@@ -333,7 +287,6 @@ def CalamityAPI(request, pk=0):
         return Response(calamity_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class ItemList(APIView):
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def ItemList(request, pk=0):
     if request.method == 'GET':
@@ -526,44 +479,6 @@ def StockedInAPI(request, pk=0):
         return Response("Stocked in Item Deleted Successfully")
 
 
-# @api_view(['GET', 'POST', 'PUT', 'DELETE'])
-# def RepackedListAPI(request, pk=0):
-#     if request.method == 'GET':
-#         repacked = Repacked.objects.all()
-#         repacked_serializer = RepackedSerializer(
-#             repacked, many=True)
-#         return Response(repacked_serializer.data)
-
-#     elif request.method == 'POST':
-#         repacked_serializer = RepackedSerializer(data=request.data)
-#         if repacked_serializer.is_valid():
-#             repacked_serializer.save()
-#             return Response("Data Added Successfully", status=status.HTTP_201_CREATED)
-#         return Response(repacked_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#     elif request.method == 'PUT':
-#         try:
-#             repacked = Repacked.objects.get(id=pk)
-#         except Repacked.DoesNotExist:
-#             return Response("Repacked Item Not Found", status=status.HTTP_404_NOT_FOUND)
-
-#         repacked_serializer = RepackedSerializer(
-#             repacked, data=request.data)
-#         if repacked_serializer.is_valid():
-#             repacked_serializer.save()
-#             return Response("Updated Successfully")
-#         return Response(repacked_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#     elif request.method == 'DELETE':
-#         try:
-#             repacked = Repacked.objects.get(id=pk)
-#         except Repacked.DoesNotExist:
-#             return Response("Repacked Item Not Found", status=status.HTTP_404_NOT_FOUND)
-
-#         repacked.delete()
-#         return Response("Repacked Item Deleted Successfully")
-
-
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def RepackedAPI(request, pk=0):
     if request.method == 'GET':
@@ -712,12 +627,6 @@ def family_count(request):
     data = {'family_count': count}
     return Response(data)
 
-
-# @api_view(['GET'])
-# def evacuation_center_count(request):
-#     count = get_evacuation_center_count()
-#     data = {'evacuation_center_count': count}
-#     return Response(data)
 
 @api_view(['GET'])
 def evacuation_center_count(request):

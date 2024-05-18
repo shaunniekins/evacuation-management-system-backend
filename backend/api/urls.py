@@ -1,23 +1,14 @@
 from django.urls import path
 from . import views
-# from .views import MyTokenObtainPairView
 from .views import CustomUserList
 
 from django.conf import settings
 from django.conf.urls.static import static
 
-# from rest_framework_simplejwt.views import (
-#     TokenRefreshView,
-# )
-
 urlpatterns = [
-    # path('', views.getRoutes),
 
     path('users/', CustomUserList.as_view(), name='user-list'),
     path('users/<int:pk>', CustomUserList.as_view(), name='user-detail'),
-
-    # path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('resident/', views.ResidentAPI),
     path('resident/<int:pk>', views.ResidentAPI),
@@ -52,9 +43,6 @@ urlpatterns = [
 
     path('stockin/', views.StockedInAPI),
     path('stockin/<int:pk>', views.StockedInAPI),
-
-    # path('repackedlist/', views.RepackedListAPI),
-    # path('repackedlist/<int:pk>', views.RepackedListAPI),
 
     path('repacked/', views.RepackedAPI),
     path('repacked/<int:pk>', views.RepackedAPI),
