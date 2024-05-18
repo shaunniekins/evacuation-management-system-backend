@@ -29,7 +29,7 @@ class Resident(models.Model):
     household_num = models.CharField(max_length=15)
     street_add = models.CharField(max_length=250)
     length_of_year = models.DateField()
-    is_senior = models.CharField(max_length=20)
+    is_senior = models.CharField(max_length=20, default='No')
 
 
 class Municipality(models.Model):
