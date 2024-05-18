@@ -12,7 +12,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 # DEBUG = os.environ.get('DEBUG') == 'True'
 
 
-ALLOWED_HOST = ['*']
+ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'backend.CustomUser'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
