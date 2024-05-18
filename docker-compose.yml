@@ -1,28 +1,22 @@
-version: '3'
+version: '3.8'
 
 services:
-  app:
+  web:
     build: .
+    command: ["gunicorn", "evacuation_management_system.wsgi:application", "--bind", "0.0.0.0:8000"]
+    volumes:
+      - .:/app
     ports:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      - SECRET_KEY=django-insecure-_64x)^%!axvbhgxm%qt7#tnobo-@c#5^zor$lc05s(9+=otrl3
-      - DEBUG=True
-      - DJANGO_ALLOWED_HOSTS=*
-      - MYSQL_DATABASE=evacuation_management_system
-      - MYSQL_ROOT_PASSWORD=Hello_World123
-      - MYSQL_PASSWORD=Hello_World123
-      - MYSQL_USER=root
-
   db:
-    image: mysql:8.0
+    image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=Hello_World123
-      - MYSQL_DATABASE=evacuation_management_system
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-volumes:
-  mysql-data:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+    ports:
+      - "3306:3306"

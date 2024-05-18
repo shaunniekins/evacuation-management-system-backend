@@ -1,12 +1,16 @@
 from datetime import timedelta
 from pathlib import Path
 import os
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-DEBUG = os.environ.get('DEBUG') == 'True'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+# DEBUG = os.environ.get('DEBUG') == 'True'
+
 
 ALLOWED_HOST = ['*']
 AUTH_USER_MODEL = 'backend.CustomUser'
@@ -76,14 +80,24 @@ WSGI_APPLICATION = 'evacuation_management_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE'),
-        'USER': os.environ.get('MYSQL_USER'),
-        'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD'),
-        'HOST': os.environ.get('MYSQL_HOST', default='localhost'),
-        'PORT': os.environ.get('MYSQL_PORT', default='3306')
-
+        'NAME': config('MYSQL_DATABASE'),
+        'USER': config('MYSQL_USER'),
+        'PASSWORD': config('MYSQL_ROOT_PASSWORD'),
+        'HOST': config('MYSQL_HOST', default='localhost'),
+        'PORT': config('MYSQL_PORT', default='3306')
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.environ.get('MYSQL_DATABASE'),
+#         'USER': os.environ.get('MYSQL_USER'),
+#         'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD'),
+#         'HOST': os.environ.get('MYSQL_HOST', default='localhost'),
+#         'PORT': os.environ.get('MYSQL_PORT', default='3306')
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
