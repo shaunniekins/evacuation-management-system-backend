@@ -79,25 +79,14 @@ WSGI_APPLICATION = 'evacuation_management_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DATABASE'),
-        'USER': config('MYSQL_USER'),
-        'PASSWORD': config('MYSQL_ROOT_PASSWORD'),
-        'HOST': config('MYSQL_HOST', default='localhost'),
-        'PORT': config('MYSQL_PORT', default='3306')
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST', default='localhost'),
+        'PORT': config('POSTGRES_PORT', default='5432')
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.environ.get('MYSQL_DATABASE'),
-#         'USER': os.environ.get('MYSQL_USER'),
-#         'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD'),
-#         'HOST': os.environ.get('MYSQL_HOST', default='localhost'),
-#         'PORT': os.environ.get('MYSQL_PORT', default='3306')
-#     }
-# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
