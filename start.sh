@@ -1,5 +1,4 @@
 #!/bin/bash
-python manage.py
 python manage.py makemigrations backend
 python manage.py migrate
 python create_superuser.py

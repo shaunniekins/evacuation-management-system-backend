@@ -1,3 +1,5 @@
+# create_superuser.py
+
 import os
 from django.contrib.auth import get_user_model
 from django.core.wsgi import get_wsgi_application
