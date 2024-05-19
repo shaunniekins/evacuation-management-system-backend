@@ -8,6 +8,7 @@ WORKDIR /app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PORT 8000
 
 # Install the required packages
 COPY ./requirements.txt /app/requirements.txt
