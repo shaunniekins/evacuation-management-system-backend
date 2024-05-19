@@ -8,20 +8,18 @@ SECRET_KEY=[your-secret-key]
 DEBUG=True
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 
-# MySQL settings
-MYSQL_DATABASE=evacuation_management_system
-MYSQL_ROOT_PASSWORD=[your-root-password]
-MYSQL_PASSWORD=[your-password]
-MYSQL_USER=[your-username]
-# MYSQL_HOST=db
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-
 # Django superuser settings
 CREATE_SUPERUSER=True
 DJANGO_SUPERUSER_USERNAME=[your-admin-username]
 DJANGO_SUPERUSER_EMAIL=[your-admin-email]
 DJANGO_SUPERUSER_PASSWORD=[your-admin-password]
+
+# Database URL
+# External database URL for outside Render (eg. local development)
+# Internal database URL for inside Render (eg. web service)
+
+# External database URL (in Render.com use the internal database URL)
+DATABASE_URL=[your-postgresql-db-url]
 ```
 
 1. Navigate to the project directory:
