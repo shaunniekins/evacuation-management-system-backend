@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Start the Django application using Gunicorn
-CMD ["gunicorn", "evacuation_management_system.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD bash -c "python manage.py wait_for_db && python manage.py makemigrations backend && python manage.py migrate && python create_superuser.py && gunicorn evacuation_management_system.wsgi:application --bind 0.0.0.0:8000"
