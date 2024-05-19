@@ -3,7 +3,7 @@ version: '3.8'
 
 services:
   web:
-    build: ./app
+    build: .
     command: bash -c "./start.sh"
     volumes:
       - .:/app
@@ -19,6 +19,11 @@ services:
       - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
       - DATABASE_URL=${DATABASE_URL}
   db:
     image: postgres:16
