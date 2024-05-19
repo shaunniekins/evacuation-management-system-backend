@@ -1,17 +1,18 @@
+# Dockerfile
 # Use the official Python image as the base image
 FROM python:3.10-slim-buster
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the project files to the container
-COPY . /app/
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Install the required packages
+COPY ./requirements.txt /app/requirements.txt
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port for the Django application
-EXPOSE 8000
-
-# Start the Django application using Gunicorn
-CMD bash -c "python wait_for_db.py && python manage.py makemigrations backend && python manage.py migrate && python create_superuser.py && gunicorn evacuation_management_system.wsgi:application --bind 0.0.0.0:8000"
+# Copy the project files to the container
+COPY . /app/
