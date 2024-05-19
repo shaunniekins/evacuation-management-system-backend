@@ -4,15 +4,24 @@ Before starting, make sure to create a `.env` file in your project root director
 
 ```bash
 # Django settings
-SECRET_KEY='your-secret-key'
+SECRET_KEY=[your-secret-key]
 DEBUG=True
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 
 # MySQL settings
 MYSQL_DATABASE=evacuation_management_system
-MYSQL_ROOT_PASSWORD='your-root-password'
-MYSQL_PASSWORD='your-password'
-MYSQL_USER='your-username'
+MYSQL_ROOT_PASSWORD=[your-root-password]
+MYSQL_PASSWORD=[your-password]
+MYSQL_USER=[your-username]
+# MYSQL_HOST=db
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+
+# Django superuser settings
+CREATE_SUPERUSER=True
+DJANGO_SUPERUSER_USERNAME=[your-admin-username]
+DJANGO_SUPERUSER_EMAIL=[your-admin-email]
+DJANGO_SUPERUSER_PASSWORD=[your-admin-password]
 ```
 
 1. Navigate to the project directory:

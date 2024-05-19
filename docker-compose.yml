@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build: .
-    command: ["gunicorn", "evacuation_management_system.wsgi:application", "--bind", "0.0.0.0:8000"]
+    command: [bash -c "python create_superuser.py && gunicorn evacuation_management_system.wsgi:application --bind 0.0.0.0:8000"]
     volumes:
       - .:/app
     ports:

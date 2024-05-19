@@ -10,6 +10,9 @@ COPY . /app/
 # Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Run the script to create a superuser
+RUN python create_superuser.py
+
 # Expose the port for the Django application
 EXPOSE 8000
 
