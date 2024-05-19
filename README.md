@@ -6,7 +6,7 @@ Before starting, make sure to create a `.env` file in your project root director
 # Django settings
 SECRET_KEY=[your-secret-key]
 DEBUG=True
-DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+DJANGO_ALLOWED_HOSTS=*
 
 # Django superuser settings
 CREATE_SUPERUSER=True
@@ -14,11 +14,17 @@ DJANGO_SUPERUSER_USERNAME=[your-admin-username]
 DJANGO_SUPERUSER_EMAIL=[your-admin-email]
 DJANGO_SUPERUSER_PASSWORD=[your-admin-password]
 
+POSTGRES_DB=[your-postgres-database]
+POSTGRES_USER=[your-postgres-user]
+POSTGRES_PASSWORD=[your-postgres-password]
+POSTGRES_HOST=[your-postgres-host]
+POSTGRES_PORT=[your-postgres-port]
+
 # Database URL
-# External database URL for outside Render (eg. local development)
+# External database URL for outside Render (local development)
 # Internal database URL for inside Render (eg. web service)
 
-# External database URL (in Render.com use the internal database URL)
+# External database URL (use the Internal for the env variable in Render)
 DATABASE_URL=[your-postgresql-db-url]
 ```
 
