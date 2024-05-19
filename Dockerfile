@@ -8,7 +8,7 @@ WORKDIR /app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PORT 8000
+ENV PORT 10000
 
 # Install the required packages
 COPY ./requirements.txt /app/requirements.txt
@@ -17,3 +17,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project files to the container
 COPY . /app/
+
+EXPOSE 10000
+CMD ["bash", "-c", "./start.sh"]
