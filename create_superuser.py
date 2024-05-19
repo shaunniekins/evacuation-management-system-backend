@@ -9,7 +9,7 @@ application = get_wsgi_application()
 
 User = get_user_model()
 
-if config('CREATE_SUPERUSER'):
+if config('CREATE_SUPERUSER', cast=bool):
     if not User.objects.filter(username=config('DJANGO_SUPERUSER_USERNAME')).exists():
         User.objects.create_superuser(
             username=config('DJANGO_SUPERUSER_USERNAME'),
